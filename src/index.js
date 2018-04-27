@@ -1,7 +1,7 @@
 /* ДЗ 1 - Функции */
 
 /*
- Задание 1:
+  Задание 1:
 
  1.1: Добавьте к функции параметр с любым именем
  1.2: Функция должна возвращать аргумент, переданный ей в качестве параметра
@@ -59,9 +59,9 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {
-    return function fn(number) {
-        return number++;
+function returnCounter(num = 0) {
+    return function fn() {
+        return ++num;
     }
 }
 
@@ -75,11 +75,13 @@ function returnCounter(number) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-    var arr = [];
-    for (let i = 0; i < arguments.lenght; i++) {
-        arr[i] = arguments[i];
+    var array = [];
+
+    for ( var i = 0; i < arguments.length; i++) {
+        array[i] = arguments[i];
     }
-    return arr;
+
+    return array;
 }
 
 /*
@@ -90,7 +92,7 @@ function returnArgumentsArray() {
 
  Пример:
    function sum(a, b) {
-	 return a + b;
+     return a + b;
    }
 
    var newSum = bindFunction(sum, 2, 4);
@@ -98,14 +100,20 @@ function returnArgumentsArray() {
    console.log(newSum()) выведет 6
  */
 function bindFunction(fn) {
-    return fn;
+    let array =[];
+    
+    for (let i = 1; i < arguments.length; i++) {
+        array[i] = arguments[i];
+    }
+
+    return fn.bind(...array);
 }
 
 export {
-	returnFirstArgument,
-	sumWithDefaults,
-	returnArgumentsArray,
-	returnFnResult,
-	returnCounter,
-	bindFunction
+    returnFirstArgument,
+    sumWithDefaults,
+    returnArgumentsArray,
+    returnFnResult,
+    returnCounter,
+    bindFunction
 }
