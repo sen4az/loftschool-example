@@ -36,9 +36,10 @@ function map(array, fn) {
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
 function reduce(array, fn, initial) {
-    let res = initial || 0;
+    let start = initial ? 0 : 1;
+    let res = initial ? initial : array[0];
 
-    for (let i = 0; i < array.length; i++) {
+    for (let i = start; i < array.length; i++) {
         res = fn(res, array[i], i, array);
     }
 
@@ -55,7 +56,7 @@ function reduce(array, fn, initial) {
  */
 function upperProps(obj) {
     let keys = Object.keys(obj);
-    
+
     return keys.map((item) => item.toUpperCase());
 
 }
@@ -68,6 +69,12 @@ function upperProps(obj) {
  */
 function slice(array, from, to) {
     let newArray = [];
+
+    if (from < 0) {
+        from = array.length + from;
+    } else if (to < 0) {
+        to = array.length + to;
+    } 
 
     for (let i = from; i < array[to]; i++) {
         newArray.push(array[i]-1);
@@ -85,7 +92,7 @@ function slice(array, from, to) {
 function createProxy(obj) {
     let proxy = new Proxy(obj, {
         set(target, prop, value) {
-            return value * value;
+            return target[prop] = value * value;
         }
     });
 
