@@ -1,7 +1,7 @@
 /* ДЗ 3 - работа с исключениями и отладчиком */
 
 /*
- Задание 1:
+ Задание 1:`
 
  1.1: Функция принимает массив и фильтрующую фукнцию и должна вернуть true или false
  Функция должна вернуть true только если fn вернула true для всех элементов массива
@@ -17,6 +17,21 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
+    for (let i = 0; i < array.length; i++) {
+        if (!fn(array[i])) {
+            return false;
+        }
+    }
+
+    if (array.length === 0 || Array.isArray(array) === false ) {
+        throw new Error('empty array');
+    }
+    
+    if (typeof fn !== 'function' ) {
+        throw new Error('fn is not a function');
+    }
+
+    return true;
 }
 
 /*
