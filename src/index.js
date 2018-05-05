@@ -125,24 +125,36 @@ function calculator(number = 0) {
     return {
         sum: function(...arg) {
             let res = number;
-            for (let i = 0; i < arg.length; i++) {
-                res = res + arg[i];
+            for (let i of arg) {
+                res = res + i;
             }
             return res;
         },
-        dif: function(num) {
-            
+        dif: function(...arg) {
+            let res = number;
+            for (let i of arg) {
+                res = res - i;
+            }
+            return res;
         },
-        div: function(num) {
-            for (let i = 0; i < arguments.length; i++) {
-                if (arguments[i] === 0) {
+        div: function(...arg) {
+            let res = number;
+
+            for (let i of arg) {
+                if(i === 0) {
                     throw new Error('division by 0');
                 }
+                res = res / i;
             }
+            return res;
             
         },
-        mul: function(num) {
-            
+        mul: function(...arg) {
+            let res = number;
+            for (let i of arg) {
+                res = res * i;
+            }
+            return res;
         }
     }
 }
