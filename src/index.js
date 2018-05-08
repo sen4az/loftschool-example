@@ -13,7 +13,9 @@
 function createDivWithText(text) {
     const element = document.createElement('div');
 
-    return element.textContent(text);
+    element.textContent = text;
+
+    return element;
 }
 
 /*
@@ -25,7 +27,7 @@ function createDivWithText(text) {
    prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
  */
 function prepend(what, where) {
-    return where.appendChild(what);
+    where.insertBefore(what, where.children[1]);
 }
 
 /*
@@ -48,7 +50,16 @@ function prepend(what, where) {
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
-    return where.filter(item => item.tagName('p'));
+    let childList = where.children;
+    let array = [];
+
+    for (let i of childList) {
+        if (i.nextElementSibling == 'p') {
+            array.push(i);
+        }
+    }
+
+    return array;
 }
 
 /*
@@ -71,7 +82,7 @@ function findAllPSiblings(where) {
 function findError(where) {
     var result = [];
 
-    for (var child of where.childNodes) {
+    for (var child of where.children) {
         result.push(child.textContent);
     }
 
@@ -91,6 +102,7 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+
 }
 
 /*
