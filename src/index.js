@@ -142,7 +142,6 @@ function deleteTextNodesRecursive(where) {
         }
         deleteTextNodesRecursive(i);
     }
-
 }
 
 /*
