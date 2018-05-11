@@ -48,7 +48,9 @@ function skipDefault(eventName, target) {
    emulateClick(document.querySelector('a')) // для указанного элемента должно быть сэмулировано события click
  */
 function emulateClick(target) {
-    target.addEventListener('click');
+    var event = new Event('click');
+
+    target.dispatchEvent(event);
 }
 
 /*
@@ -63,7 +65,7 @@ function emulateClick(target) {
    кликнули на кнопку (элемент с тегом button)
  */
 function delegate(target, fn) {
-    for (let item of target) {
+    for (let item of target.children) {
         if (item.tagName === 'BUTTON') {
             item.addEventListener('click', fn);
         }
@@ -82,6 +84,8 @@ function delegate(target, fn) {
    который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
+    target.addEventListener('click', fn);
+    target.removeEventListener('click', fn);
 }
 
 export {
