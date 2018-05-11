@@ -84,8 +84,11 @@ function delegate(target, fn) {
    который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
-    target.addEventListener('click', fn);
-    target.removeEventListener('click', fn);
+    function remove(){
+      target.removeEventListener('click', remove);
+      return fn();
+    }
+    target.addEventListener('click', remove);
 }
 
 export {
