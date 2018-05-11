@@ -27,6 +27,14 @@ const homeworkContainer = document.querySelector('#homework-container');
    homeworkContainer.appendChild(newDiv);
  */
 function createDiv() {
+    const newDiv = document.createElement('div');
+    let random = Math.random();
+
+    newDiv.style.backgroundColor = 'red';
+    newDiv.style.position = 'absolute';
+    newDiv.style.left = `${random}%`;
+    newDiv.style.top = `${random}%`;
+    homeworkContainer.appendChild(newDiv);
 }
 
 /*
