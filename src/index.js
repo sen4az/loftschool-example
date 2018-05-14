@@ -136,14 +136,20 @@ function deleteTextNodes(where) {
  */
 function deleteTextNodesRecursive(where) {
 
-    for (let i of where.childNodes) {
-        if (i.nodeType === 3) {
-            where.removeChild(i);
+    for (let i = 0; i < where.childNodes.length;) {
+        const element = where.childNodes[i];
+
+        if ( element.childNodes.length > 0) {
+            deleteTextNodesRecursive(element);
         }
-        deleteTextNodesRecursive(i);
+
+        if (element.nodeType === 3) {
+            where.removeChild(element);
+        } else {
+            ++i;
+        }
     }
 }
-
 /*
  Задание 7 *:
 
