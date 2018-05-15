@@ -27,14 +27,22 @@ const homeworkContainer = document.querySelector('#homework-container');
    homeworkContainer.appendChild(newDiv);
  */
 function createDiv() {
-    const newDiv = document.createElement('div');
-    let random = Math.random();
 
-    newDiv.style.backgroundColor = 'red';
+    const newDiv = document.createElement('div');
+    let random = Math.random() *1000;
+    let random2 = Math.random() *888;
+    let random3 = Math.random() *999;
+
+    newDiv.style.backgroundColor = `rgb(${random},${random2},${random3})`;
+    newDiv.style.width = `${random}px`;
+    newDiv.style.height = `${random}px`;
     newDiv.style.position = 'absolute';
-    newDiv.style.left = `${random}%`;
-    newDiv.style.top = `${random}%`;
-    homeworkContainer.appendChild(newDiv);
+    newDiv.style.right = `${random}px`;
+    newDiv.style.top = `${random}px`;
+    newDiv.classList.add('draggable-div');
+    newDiv.setAttribute('draggable', 'true');
+
+    return newDiv;
 }
 
 /*
@@ -46,11 +54,20 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
+    target.addEventListener('dragstart', (e) => {
+        target.style.backgroundColor = 'green';
+    });
+    target.addEventListener('dragenter', (e) => {
+        target.style.backgroundColor = 'green';
+    });
+
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
 
-addDivButton.addEventListener('click', function() {
+addDivButton.addEventListener('click', function(e) {
+    e.preventDefault();
+
     // создать новый div
     const div = createDiv();
 
