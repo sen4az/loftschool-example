@@ -40,7 +40,17 @@ function loadAndSortTowns() {
             if (xhr.status >= 400) {
                 reject();
             } else {
-                resolve(xhr.response);
+                const cities = xhr.response;
+                const sortCities = cities.sort((a,b) => {
+                    if(a.name > b.name) {
+                        return 1;
+                    }
+                    if(a.name < b.name) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                resolve(sortCities);
             }
         });
         xhr.addEventListener('error', reject);
