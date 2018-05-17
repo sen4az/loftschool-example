@@ -53,8 +53,6 @@ function loadTowns() {
                     return 0;
                 });
 
-                loadingBlock.style.display = 'none';
-
                 return sortCities;
             });
         })
@@ -74,6 +72,10 @@ function loadTowns() {
  */
 function isMatching(full, chunk) {
 
+    let fullLower = full.toLowerCase();
+    let chunkLower = chunk.toLowerCase();
+
+    
 }
 
 /* Блок с надписью "Загрузка" */
