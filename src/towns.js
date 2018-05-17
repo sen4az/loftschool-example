@@ -40,8 +40,22 @@ function loadTowns() {
 
     return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
         .then(response => {
-            response.json().then(json => {
-                console.log(json);
+            return response.json().then(json => {
+                const sortCities = json.sort((a, b) => {
+
+                    if (a.name > b.name) {
+                        return 1;
+                    }
+                    if (a.name < b.name) {
+                        return -1;
+                    }
+
+                    return 0;
+                });
+
+                loadingBlock.style.display = 'none';
+
+                return sortCities;
             });
         })
         .catch(() => console.log('что-то пошло не так'));
@@ -59,6 +73,7 @@ function loadTowns() {
    isMatching('Moscow', 'Moscov') // false
  */
 function isMatching(full, chunk) {
+
 }
 
 /* Блок с надписью "Загрузка" */
