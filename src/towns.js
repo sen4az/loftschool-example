@@ -59,6 +59,11 @@ function loadTowns() {
         .catch(() => console.log('что-то пошло не так'));
 }
 
+loadTowns().then(cities => {
+    loadingBlock.style.display = 'none';
+    filterBlock.style.display = 'inline-block'
+})
+
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
  Проверка должна происходить без учета регистра символов
@@ -75,7 +80,7 @@ function isMatching(full, chunk) {
     let fullLower = full.toLowerCase();
     let chunkLower = chunk.toLowerCase();
 
-    
+    return fullLower.includes(chunkLower);
 }
 
 /* Блок с надписью "Загрузка" */
