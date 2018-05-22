@@ -40,29 +40,29 @@ function loadTowns() {
 
     return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
         .then(response => {
-            return response.json().then(json => {
-                const sortCities = json.sort((a, b) => {
-
-                    if (a.name > b.name) {
-                        return 1;
-                    }
-                    if (a.name < b.name) {
-                        return -1;
-                    }
-
-                    return 0;
-                });
-
-                return sortCities;
-            });
+            return response.json();
         })
-        .catch(() => console.log('что-то пошло не так'));
-}
+        .then(json => {
+            const sortCities = json.sort((a, b) => {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
 
-loadTowns().then(cities => {
-    loadingBlock.style.display = 'none';
-    filterBlock.style.display = 'inline-block'
-})
+                return 0;
+            });
+
+            loadingBlock.innerHTML = '';
+            filterBlock.style.display = 'inline-block';
+
+            return sortCities;
+        })
+        .catch(() => {
+            loadingBlock.innerText = 'Ошибка загрузки';
+        })
+}
 
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
@@ -93,7 +93,24 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
 filterInput.addEventListener('keyup', function () {
-    // это обработчик нажатия кливиш в текстовом поле
+    let val = filterInput.value;
+    let fragment = document.createDocumentFragment();
+
+    filterResult.innerHTML = '';
+
+    loadTowns().then(cities => {
+        cities.filter(item => {
+            isMatching(item.name, val).forEach(item => {
+                let div = document.createElement('div');
+
+                div.innerText = item.name;
+
+                fragment.appendChild(div);
+            })
+        });
+
+        filterResult.appendChild(fragment);
+    })
 });
 
 export {
