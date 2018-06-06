@@ -92,21 +92,22 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
+const list = loadTowns();
+
 filterInput.addEventListener('keyup', function () {
     let val = filterInput.value;
     let fragment = document.createDocumentFragment();
 
     filterResult.innerHTML = '';
 
-    loadTowns().then(cities => {
-        cities.filter(item => {
-            isMatching(item.name, val).forEach(item => {
-                let div = document.createElement('div');
+    list.then(cities => {
+        cities.filter(item => isMatching(item.name, val)).forEach((item) => {
 
-                div.innerText = item.name;
+            let div = document.createElement('div');
 
-                fragment.appendChild(div);
-            })
+            div.innerText = item.name;
+
+            fragment.appendChild(div);
         });
 
         filterResult.appendChild(fragment);

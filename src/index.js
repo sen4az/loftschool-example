@@ -12,7 +12,7 @@ function delayPromise(seconds) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve();
-        }, seconds);
+        }, seconds * 1000);
     });
 }
 
@@ -41,13 +41,16 @@ function loadAndSortTowns() {
                 reject();
             } else {
                 const cities = xhr.response;
-                const sortCities = cities.sort((a,b) => {
-                    if(a.name > b.name) {
+
+                const sortCities = cities.sort((a, b) => {
+
+                    if (a.name > b.name) {
                         return 1;
                     }
-                    if(a.name < b.name) {
+                    if (a.name < b.name) {
                         return -1;
                     }
+
                     return 0;
                 });
                 resolve(sortCities);
